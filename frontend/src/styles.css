@@ -197,6 +197,23 @@ h1 { margin: 9px 0 6px; font-family: Georgia, "Times New Roman", serif; font-siz
 .ngram-list > div { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 8px; padding: 6px 7px; border: 1px solid #eeede7; border-radius: 4px; background: #fbfaf7; }
 .ngram-list > div > span { color: #84877e; font: 8px var(--mono); }
 .ngram-list code { color: #52574e; font: 8px/1.5 var(--mono); overflow-wrap: anywhere; }
+.tfidf-calculation { min-width: 470px; }
+.prediction-table-wrap { max-height: 290px; overflow: auto; margin-top: 8px; border: 1px solid #eeede7; border-radius: 5px; }
+.prediction-table { width: 100%; border-collapse: collapse; font-size: 9px; }
+.prediction-table th, .prediction-table td { padding: 8px 7px; border-bottom: 1px solid #efeee9; text-align: left; }
+.prediction-table th { position: sticky; top: 0; color: #85877e; background: #faf9f6; font: 8px var(--mono); }
+.prediction-table td { color: #5d6058; }
+.prediction-table td:first-child { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.prediction-table .prediction-correct { color: #52755b; }
+.prediction-table .prediction-wrong { color: #a2674e; font-weight: 600; }
+.language-trace { display: grid; margin-top: 8px; }
+.language-trace-row { display: grid; grid-template-columns: minmax(45px, .8fr) 14px minmax(45px, .8fr) minmax(35px, 1fr) 46px; gap: 6px; align-items: center; min-height: 30px; border-bottom: 1px solid #efeee9; }
+.trace-context, .language-trace-row strong { overflow: hidden; color: #53574e; font: 9px var(--mono); text-overflow: ellipsis; white-space: nowrap; }
+.trace-context { text-align: right; color: #868980; }
+.trace-arrow { color: #a1a39b; font-size: 9px; text-align: center; }
+.trace-track { height: 5px; overflow: hidden; border-radius: 10px; background: #eeeee8; }
+.trace-track i { display: block; height: 100%; min-width: 2px; border-radius: inherit; background: #78977f; }
+.language-trace-row code { color: #777a72; font: 8px var(--mono); text-align: right; }
 .embedding-map-section { margin-top: 17px; }
 .vector-map { margin-top: 8px; overflow: hidden; border: 1px solid #eeede7; border-radius: 6px; background: radial-gradient(ellipse at center, #fbfcf9 0%, #f7f7f2 100%); }
 .vector-map svg { display: block; width: 100%; height: auto; min-height: 220px; }
@@ -220,4 +237,6 @@ h1 { margin: 9px 0 6px; font-family: Georgia, "Times New Roman", serif; font-siz
   .map-word text { font-size: 7px; }
   .learning-steps { padding: 11px; }
   .pipeline-explanation { padding-left: 25px; }
+  .language-trace-row { grid-template-columns: minmax(35px, .8fr) 12px minmax(35px, .8fr) minmax(25px, 1fr) 39px; gap: 4px; }
+  .trace-context, .language-trace-row strong { font-size: 8px; }
 }

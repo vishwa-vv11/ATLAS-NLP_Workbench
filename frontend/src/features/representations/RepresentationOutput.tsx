@@ -139,6 +139,53 @@ export function RepresentationOutput({
           terms common across the collection. Values are L2-normalized per
           document.
         </p>
+        <SectionLabel trailing="FIRST DOCUMENT · TERM-LEVEL CALCULATION">
+          HOW TF–IDF IS COMPUTED
+        </SectionLabel>
+        <div className="matrix-scroll">
+          <table className="data-matrix tfidf-calculation">
+            <thead>
+              <tr>
+                <th>TERM</th>
+                <th>TF</th>
+                <th>DOC FREQ</th>
+                <th>IDF</th>
+                <th>TF × IDF</th>
+                <th>NORMALIZED</th>
+              </tr>
+            </thead>
+            <tbody>
+              {result.vocabulary.map((term, index) => {
+                const termFrequency = result.bag_of_words[0]?.[index] ?? 0;
+                if (!termFrequency) return null;
+                const documentFrequency = result.bag_of_words.filter(
+                  (row) => (row[index] ?? 0) > 0,
+                ).length;
+                const inverseDocumentFrequency =
+                  Math.log(
+                    (1 + result.bag_of_words.length) /
+                      (1 + documentFrequency),
+                  ) + 1;
+                const rawWeight = termFrequency * inverseDocumentFrequency;
+                return (
+                  <tr key={term}>
+                    <td>{term}</td>
+                    <td>{termFrequency}</td>
+                    <td>{documentFrequency}</td>
+                    <td>{inverseDocumentFrequency.toFixed(3)}</td>
+                    <td>{rawWeight.toFixed(3)}</td>
+                    <td>{(result.tfidf[0]?.[index] ?? 0).toFixed(3)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p className="result-explanation">
+          IDF = log((1 + document count) / (1 + documents containing the term))
+          + 1. TF × IDF gives the raw weight; the final column is that weight
+          after L2 normalization across the document.
+        </p>
       </section>
       <NoteBox>
         <Info size={15} />

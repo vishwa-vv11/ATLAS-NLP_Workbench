@@ -114,6 +114,50 @@ export function ClassificationOutput({
         </p>
       </section>
       <section className="result-section">
+        <SectionLabel trailing={`${Math.min(result.test_texts.length, 20)} OF ${result.test_texts.length}`}>
+          HELD-OUT PREDICTIONS
+        </SectionLabel>
+        <div className="prediction-table-wrap">
+          <table className="prediction-table">
+            <thead>
+              <tr>
+                <th>TEXT</th>
+                <th>ACTUAL</th>
+                <th>PREDICTED</th>
+                <th>RESULT</th>
+              </tr>
+            </thead>
+            <tbody>
+              {result.test_texts.slice(0, 20).map((text, index) => {
+                const correct =
+                  result.true_labels[index] === result.predictions[index];
+                return (
+                  <tr key={`${index}-${text}`}>
+                    <td title={text}>{text}</td>
+                    <td>{result.true_labels[index]}</td>
+                    <td>{result.predictions[index]}</td>
+                    <td className={correct ? "prediction-correct" : "prediction-wrong"}>
+                      {correct ? "Correct" : "Mismatch"}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {result.test_texts.length > 20 && (
+          <p className="micro-note">
+            Showing 20 of {result.test_texts.length} held-out predictions. The
+            error list below highlights mistakes.
+          </p>
+        )}
+        <p className="result-explanation">
+          Each row compares the model’s predicted label with the known label
+          withheld for testing. This is the direct evidence behind the summary
+          metrics.
+        </p>
+      </section>
+      <section className="result-section">
         <SectionLabel trailing={`${result.errors.length} ERRORS`}>
           MISCLASSIFIED EXAMPLES
         </SectionLabel>

@@ -9,6 +9,18 @@ preprocessing, sparse text representations, classical classifiers, statistical
 language modeling, static embeddings, text analysis, evaluation, and a Streamlit
 interface. It does not use LLMs, generative AI, RAG, or vector databases.
 
+## Problem statement
+
+Classical NLP is often taught as separate algorithms, while the connection
+between raw text, preprocessing, numeric features, model predictions, and
+evaluation can be hard to see. ATLAS addresses this learning gap with an
+interactive workbench that lets users provide text or labeled examples, inspect
+intermediate outputs, and see explanations alongside results for each step.
+
+ATLAS is intended for learning and small, reproducible experiments. It is not a
+production text-understanding service, and its bundled demonstration examples
+do not establish real-world model quality.
+
 ## Architecture
 
 Each feature has its own module under
@@ -93,11 +105,27 @@ demonstration only—not a real dataset or evidence of model quality. Embeddings
 are trained on the user-provided corpus; no pretrained vector files are sent to
 or downloaded by the React app.
 
+## Screenshots
+
+![ATLAS NLP Workbench](docs/screenshots/atlas-workbench.png)
+
 The React workbench explains the processing steps for each feature. Word
 embeddings include a two-dimensional PCA projection of the trained word
 vectors, with cosine-similarity neighbors highlighted. PCA is only a visual
 approximation of the full vector space; the original vectors are used for
 similarity results.
+
+## Problem statement
+
+Classical NLP is often taught as separate algorithms, while the connection
+between raw text, preprocessing, numeric features, model predictions, and
+evaluation can be hard to see. ATLAS addresses this learning gap with an
+interactive workbench that lets users provide text or labeled examples, inspect
+intermediate outputs, and see explanations alongside results for each step.
+
+ATLAS is intended for learning and small, reproducible experiments. It is not a
+production text-understanding service, and its bundled demonstration examples
+do not establish real-world model quality.
 
 Build the production frontend bundle:
 
@@ -160,6 +188,38 @@ The default split is 80/20 with a fixed seed and stratification when the class
 counts support it. The vectorizer is fit within the training pipeline, so test
 text is not used to learn the vocabulary. Record the dataset source, license,
 labels, split, seed, and results before presenting metrics as project findings.
+
+## Reproducible benchmark status
+
+A real-dataset benchmark is not bundled yet. Before publishing benchmark
+results, select a dataset with a verified license that permits the intended
+use, document the source and label mapping, and keep raw data out of the
+repository unless its license explicitly permits redistribution. The benchmark
+should use one fixed split and seed to compare:
+
+- Bag of Words + Multinomial Naive Bayes
+- TF-IDF + Logistic Regression
+- Averaged Word2Vec embeddings
+
+Report macro-F1, precision, recall, accuracy, confusion matrices, and runtime
+for each method. Describe these as reproducible, dataset-specific baselines,
+not universal performance claims.
+
+## Reproducible benchmark status
+
+A real-dataset benchmark is not bundled yet. Before publishing benchmark
+results, select a dataset with a verified license that permits the intended
+use, document the source and label mapping, and keep raw data out of the
+repository unless its license explicitly permits redistribution. The benchmark
+should use one fixed split and seed to compare:
+
+- Bag of Words + Multinomial Naive Bayes
+- TF-IDF + Logistic Regression
+- Averaged Word2Vec embeddings
+
+Report macro-F1, precision, recall, accuracy, confusion matrices, and runtime
+for each method. Describe these as reproducible, dataset-specific baselines,
+not universal performance claims.
 
 ## What is implemented
 

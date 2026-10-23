@@ -41,6 +41,12 @@ export interface LanguageModelResult {
   perplexity: number;
   training_sentences: number;
   evaluation_sentences: number;
+  token_probabilities: {
+    sentence: number;
+    previous_token: string;
+    next_token: string;
+    probability: number;
+  }[];
 }
 
 export interface EmbeddingResult {

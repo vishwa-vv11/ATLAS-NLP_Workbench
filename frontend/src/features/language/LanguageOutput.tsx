@@ -98,6 +98,42 @@ export function LanguageOutput({
           <code> &lt;UNK&gt; </code>.
         </p>
       </section>
+      <section className="result-section">
+        <SectionLabel trailing={`FIRST ${Math.min(result.token_probabilities.length, 40)} STEPS`}>
+          NEXT-WORD PROBABILITY TRACE
+        </SectionLabel>
+        <div className="language-trace">
+          {result.token_probabilities.slice(0, 40).map((step, index) => (
+            <div className="language-trace-row" key={`${step.sentence}-${index}`}>
+              <span className="trace-context">{step.previous_token}</span>
+              <span className="trace-arrow">→</span>
+              <strong>{step.next_token}</strong>
+              <div
+                className="trace-track"
+                aria-label={`Probability ${step.probability.toFixed(4)}`}
+              >
+                <i
+                  style={{
+                    width: `${Math.max(2, step.probability * 100)}%`,
+                  }}
+                />
+              </div>
+              <code>{step.probability.toFixed(4)}</code>
+            </div>
+          ))}
+        </div>
+        {result.token_probabilities.length > 40 && (
+          <p className="micro-note">
+            Showing the first 40 of {result.token_probabilities.length} word
+            transitions.
+          </p>
+        )}
+        <p className="result-explanation">
+          Each row shows the probability assigned to the next token given the
+          previous token. Perplexity combines all these probabilities; one
+          surprising transition can raise the overall score.
+        </p>
+      </section>
       <NoteBox>
         <Info size={15} />
         <span>

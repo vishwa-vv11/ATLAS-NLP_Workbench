@@ -121,8 +121,7 @@ export function AppShell({
           </section>
           <footer className="footer">
             <span>
-              FIELDNOTES <span className="footer-separator">/</span> TEXT
-              INTELLIGENCE
+              ATLAS <span className="footer-separator">/</span> CLASSICAL NLP
             </span>
             <span>
               Classical NLP workbench{" "}

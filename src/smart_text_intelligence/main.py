@@ -273,11 +273,26 @@ def evaluate_language_model(
         for sentence in split_sentences(evaluation_text)
     ]
     model = BigramLanguageModel(alpha=alpha).fit(training_sentences)
+    token_probabilities: list[dict[str, Any]] = []
+    for sentence_index, sentence in enumerate(evaluation_sentences, start=1):
+        previous = "<s>"
+        for token in [*sentence, "</s>"]:
+            current = token if token in model.vocabulary else "<UNK>"
+            token_probabilities.append(
+                {
+                    "sentence": sentence_index,
+                    "previous_token": previous,
+                    "next_token": current,
+                    "probability": model.probability(previous, current),
+                }
+            )
+            previous = current
     return {
         "model": model,
         "perplexity": model.perplexity(evaluation_sentences),
         "training_sentences": len(training_sentences),
         "evaluation_sentences": len(evaluation_sentences),
+        "token_probabilities": token_probabilities,
     }
 
 
