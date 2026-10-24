@@ -109,11 +109,51 @@ or downloaded by the React app.
 
 ![ATLAS NLP Workbench](docs/screenshots/atlas-workbench.png)
 
-The React workbench explains the processing steps for each feature. Word
-embeddings include a two-dimensional PCA projection of the trained word
-vectors, with cosine-similarity neighbors highlighted. PCA is only a visual
-approximation of the full vector space; the original vectors are used for
-similarity results.
+The overview shows the text analysis workspace and navigation between the five
+features. Each feature is shown below with a description of what it helps
+explore.
+
+### Text analysis
+
+![Text analysis showing the preprocessing pipeline and analysis results](docs/screenshots/atlas-text-analysis.png)
+
+Inspect how raw text changes through preprocessing, from contraction expansion
+and tokenization to stop-word filtering, stemming, and lemmatization. The
+results also show frequent terms, TF-IDF keyword scores, and a small lexicon
+sentiment baseline.
+
+### Representations
+
+![Text representations including vocabulary, bag-of-words, one-hot, bigrams, and TF-IDF](docs/screenshots/atlas-representations.png)
+
+Explore how a document collection becomes numeric features. The view compares
+vocabulary and document counts with bag-of-words, one-hot, bigram, and manual
+TF-IDF representations.
+
+### Word embeddings
+
+![Word embeddings with a two-dimensional PCA projection and nearest words](docs/screenshots/atlas-word-embeddings.png)
+
+Train static word embeddings on a small corpus and inspect nearby words by
+cosine similarity. The PCA map is a two-dimensional approximation of the full
+vector space; similarity results use the original vectors.
+
+### Text classification
+
+![Text classification results with metrics, a confusion matrix, and held-out predictions](docs/screenshots/atlas-text-classification.png)
+
+Train a baseline classifier on labeled text and review held-out metrics,
+confusion counts, predictions, and misclassified examples. Results depend on
+the selected dataset and split and should not be treated as general performance
+claims.
+
+### Language model
+
+![Bigram language-model configuration and held-out perplexity results](docs/screenshots/atlas-language-model.png)
+
+Evaluate a smoothed bigram language model against held-out text. The results
+include perplexity and a next-word probability trace to show how the model
+scores word sequences.
 
 ## Problem statement
 
